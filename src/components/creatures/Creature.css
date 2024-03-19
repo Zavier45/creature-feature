@@ -1,0 +1,27 @@
+.creature-container {
+    display: flex;
+    justify-content: center;
+}
+
+.creature {
+    border: solid black 2px;
+    margin: 7px 0px 17px 25%;
+    padding: 13px;
+    background-color: #AFE3C0;
+    box-shadow: 5px 5px #344e41;
+    width: 50%;
+    text-align: start;
+}
+
+.creature-info {
+    color: navy;
+    font-weight: 600;
+    font-size: larger;
+}
+
+.creature > footer {
+    display: flex;
+    border-top: 1px sold var(--outline);
+    align-items: center;
+    justify-content: space-between;
+}
