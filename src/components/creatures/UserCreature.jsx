@@ -1,9 +1,13 @@
 import React from "react";
+import { deleteCreature } from "../../services/creatureService";
 
-export const UserCreature = () => {
+export const UserCreature = ({ currentUser }) => {
   const [showUserCreatures, setShowUserCreatures] = React.useState([]);
 
-  React.useEffect();
+  React.useEffect(() => {
+    if (currentUser.id == creature.userId) {
+    }
+  });
 
   return (
     <section>
