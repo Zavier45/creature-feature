@@ -21,10 +21,10 @@ export const deleteCreature = async (deletedCreature) => {
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify(creatureObject),
+    body: JSON.stringify(deletedCreature),
   };
   const response = await fetch(
-    `http://localhost:4513/creatures/${deletedCreaure.id}`,
+    `http://localhost:4513/creatures/${deletedCreature.id}`,
     deleteOptions
   );
 };

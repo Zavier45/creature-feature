@@ -1,9 +1,13 @@
 import React from "react";
-import { getAllCreatures } from "../../services/creatureService.js";
+import {
+  deleteCreature,
+  getAllCreatures,
+} from "../../services/creatureService.js";
 import "./Creature.css";
 
-export const Creature = () => {
+export const Creature = ({ currentUser }) => {
   const [allCreatures, setAllCreatures] = React.useState([]);
+  const [searchObj, setSearchObj] = React.useState("");
 
   React.useEffect(() => {
     getAllCreatures().then((creaturesArray) => {
@@ -13,6 +17,17 @@ export const Creature = () => {
 
   return (
     <div className="creature-container">
+      <div>
+        <input
+          type="text"
+          placeholder="Search Creatures"
+          className="creature-search"
+          value={searchObj}
+          onChange={(searchEvent) => {
+            setSearchObj(searchEvent.target.value);
+          }}
+        />
+      </div>
       <article className="creatures">
         {allCreatures.map((creature) => {
           return (
@@ -26,6 +41,20 @@ export const Creature = () => {
               <div>{creature?.country.name}</div>
               <h3>Category</h3>
               <div>{creature?.category.category}</div>
+              {creature.userId === currentUser.id ? (
+                <div>
+                  <button
+                    onClick={() => {
+                      deleteCreature(creature);
+                    }}
+                  >
+                    Terminate
+                  </button>
+                  <button>Edit</button>
+                </div>
+              ) : (
+                ""
+              )}
             </section>
           );
         })}

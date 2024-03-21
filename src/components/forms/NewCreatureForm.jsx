@@ -3,7 +3,7 @@ import { CountryList } from "./CountryList";
 import React from "react";
 import { getAllCreatures, postCreature } from "../../services/creatureService";
 
-export const NewCreatureForm = () => {
+export const NewCreatureForm = ({ currentUser }) => {
   const [creatureObj, setCreatureObj] = React.useState({});
   const [creatureName, setCreatureName] = React.useState("");
   const [creatureCountry, setCreatureCountry] = React.useState(0);
@@ -18,7 +18,7 @@ export const NewCreatureForm = () => {
       diet: creatureDiet,
       categoryId: creatureCategory,
       countryId: creatureCountry,
-      userId: 2,
+      userId: currentUser.id,
     };
     postCreature(newCreature).then((response) => {
       getAllCreatures().then((creaturesArray) => {

@@ -1,31 +1,23 @@
+import { Route, Routes } from "react-router";
 import "./App.css";
-import { Routes, Route, Outlet } from "react-router-dom";
-import { Creature } from "./components/creatures/Creature.jsx";
-import { NavBar } from "./components/nav/NavBar.jsx";
-import { NewCreatureForm } from "./components/forms/NewCreatureForm.jsx";
-import { Welcome } from "./components/home/Welcome.jsx";
-import { CreateAccount } from "./components/forms/CreateAccount.jsx";
-import { UserHome } from "./components/home/Home.jsx";
+import { Login } from "./components/auth/Login";
+import { Register } from "./components/auth/Register";
+import { Authorized } from "./views/Authorized";
+import { ApplicationViews } from "./views/ApplicationViews";
 
 export const App = () => {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route
-        path="/"
+        path="/*"
         element={
-          <>
-            <NavBar />
-            <Outlet />
-          </>
+          <Authorized>
+            <ApplicationViews />
+          </Authorized>
         }
-      >
-        <Route index element={<Welcome />} />
-        <Route path="user-home" element={<UserHome />} />
-        <Route path="creatures" element={<Creature />} />
-        <Route path="new-creature" element={<NewCreatureForm />} />
-      </Route>
-
-      <Route path="accounts" element={<CreateAccount />} />
+      />
     </Routes>
   );
 };
