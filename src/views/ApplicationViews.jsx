@@ -38,6 +38,12 @@ export const ApplicationViews = () => {
           path="new-creature"
           element={<NewCreatureForm currentUser={currentUser} />}
         />
+        <Route path="edit">
+          <Route
+            path=":creatureId"
+            element={<NewCreatureForm currentUser={currentUser} />}
+          />
+        </Route>
       </Route>
     </Routes>
   );
