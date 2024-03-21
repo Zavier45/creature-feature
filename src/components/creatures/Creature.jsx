@@ -4,6 +4,7 @@ import {
   getAllCreatures,
 } from "../../services/creatureService.js";
 import "./Creature.css";
+import { useNavigate } from "react-router";
 
 export const Creature = ({ currentUser }) => {
   const [allCreatures, setAllCreatures] = React.useState([]);
@@ -14,6 +15,8 @@ export const Creature = ({ currentUser }) => {
       setAllCreatures(creaturesArray);
     }, []);
   });
+
+  const navigate = useNavigate();
 
   return (
     <div className="creature-container">
@@ -50,7 +53,13 @@ export const Creature = ({ currentUser }) => {
                   >
                     Terminate
                   </button>
-                  <button>Edit</button>
+                  <button
+                    onClick={() => {
+                      navigate(`../edit/${creature.id}`);
+                    }}
+                  >
+                    Edit
+                  </button>
                 </div>
               ) : (
                 ""

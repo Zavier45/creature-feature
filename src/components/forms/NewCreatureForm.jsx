@@ -1,7 +1,13 @@
 import { CategoryList } from "./CategoryList";
 import { CountryList } from "./CountryList";
 import React from "react";
-import { getAllCreatures, postCreature } from "../../services/creatureService";
+import {
+  getAllCreatures,
+  getCreatureById,
+  postCreature,
+  putCreature,
+} from "../../services/creatureService";
+import { useNavigate, useParams } from "react-router";
 
 export const NewCreatureForm = ({ currentUser }) => {
   const [creatureObj, setCreatureObj] = React.useState({});
@@ -10,6 +16,19 @@ export const NewCreatureForm = ({ currentUser }) => {
   const [creatureCategory, setCreatureCategory] = React.useState(0);
   const [creatureDescription, setCreatureDescription] = React.useState("");
   const [creatureDiet, setCreatureDiet] = React.useState("");
+
+  const { creatureId } = useParams();
+  const navigate = useNavigate();
+
+  const importExistingCreature = () => {
+    getCreatureById(creatureId).then((editCreature) => {
+      setCreatureName(editCreature.name);
+      setCreatureCountry(editCreature.countryId);
+      setCreatureCategory(editCreature.categoryId);
+      setCreatureDescription(editCreature.description);
+      setCreatureDiet(editCreature.diet);
+    });
+  };
 
   const addNewCreature = () => {
     const newCreature = {
@@ -32,6 +51,33 @@ export const NewCreatureForm = ({ currentUser }) => {
     });
   };
 
+  const editCreature = () => {
+    const editedCreature = {
+      name: creatureName,
+      description: creatureDescription,
+      diet: creatureDiet,
+      categoryId: creatureCategory,
+      countryId: creatureCountry,
+      userId: currentUser.id,
+      id: creatureId,
+    };
+    putCreature(editedCreature).then(() => {
+      navigate("/creatures");
+    });
+  };
+
+  const handleSubmit = () => {
+    if (creatureId) {
+      editCreature();
+    } else {
+      addNewCreature();
+    }
+  };
+  React.useEffect(() => {
+    if (creatureId) {
+      importExistingCreature();
+    }
+  }, [creatureId]);
   return (
     <div className="new-creature-form">
       <div>
@@ -95,13 +141,7 @@ export const NewCreatureForm = ({ currentUser }) => {
           />
         </div>
         <div>
-          <button
-            onClick={() => {
-              addNewCreature();
-            }}
-          >
-            Submit
-          </button>
+          <button onClick={handleSubmit}>Submit</button>
         </div>
       </div>
     </div>
