@@ -6,12 +6,19 @@
     width: 100%;
     padding: 0.5rem;
 }
-
+.navbar-list {
+    display: flex;
+    flex-wrap: nowrap;
+}
 .navbar-item {
     flex-basis: 20%;
     list-style-type: none;
     text-align: center;
-    color: var(--offWhite);
+    color: purple;
+    margin: 3px;
+    border: 1px blueviolet solid;
+    border-radius: 15px;
+    background-color: ghostwhite;
 }
 
 .navbar-link {
@@ -24,5 +31,5 @@
 }
 
 .navbar-link:hover {
-    color: var(--primary);
+    color: #E9E6FF;
 }
