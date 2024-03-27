@@ -16,3 +16,13 @@ select {
     padding: 3px;
     margin: 5px;
 }
+
+.description {
+    height: 150px;
+    width: 100%;
+}
+
+.diet {
+    height: 75px;
+    width: 100%;
+}
