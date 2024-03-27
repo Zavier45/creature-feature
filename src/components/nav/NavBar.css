@@ -1,8 +1,9 @@
 .navbar {
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: start;
     background-color: var(--dark);
-    margin: 0;
     width: 100%;
     padding: 0.5rem;
 }
@@ -15,10 +16,11 @@
     list-style-type: none;
     text-align: center;
     color: purple;
-    margin: 3px;
+    margin: 3px 125px;
     border: 1px blueviolet solid;
     border-radius: 15px;
     background-color: ghostwhite;
+    width: 150px;
 }
 
 .navbar-link {
