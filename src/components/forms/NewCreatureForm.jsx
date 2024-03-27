@@ -8,6 +8,7 @@ import {
   putCreature,
 } from "../../services/creatureService";
 import { useNavigate, useParams } from "react-router";
+import "./NewCreature.css";
 
 export const NewCreatureForm = ({ currentUser }) => {
   const [creatureObj, setCreatureObj] = React.useState({});
@@ -16,6 +17,7 @@ export const NewCreatureForm = ({ currentUser }) => {
   const [creatureCategory, setCreatureCategory] = React.useState(0);
   const [creatureDescription, setCreatureDescription] = React.useState("");
   const [creatureDiet, setCreatureDiet] = React.useState("");
+  const [creatureImg, setCreatureImg] = React.useState("");
 
   const { creatureId } = useParams();
   const navigate = useNavigate();
@@ -27,6 +29,7 @@ export const NewCreatureForm = ({ currentUser }) => {
       setCreatureCategory(editCreature.categoryId);
       setCreatureDescription(editCreature.description);
       setCreatureDiet(editCreature.diet);
+      setCreatureImg(editCreature.image);
     });
   };
 
@@ -38,6 +41,7 @@ export const NewCreatureForm = ({ currentUser }) => {
       categoryId: creatureCategory,
       countryId: creatureCountry,
       userId: currentUser.id,
+      image: creatureImg,
     };
     postCreature(newCreature).then((response) => {
       getAllCreatures().then((creaturesArray) => {
@@ -47,6 +51,7 @@ export const NewCreatureForm = ({ currentUser }) => {
         setCreatureCategory(0);
         setCreatureDescription("");
         setCreatureDiet("");
+        setCreatureImg("");
       });
     });
   };
@@ -60,6 +65,7 @@ export const NewCreatureForm = ({ currentUser }) => {
       countryId: creatureCountry,
       userId: currentUser.id,
       id: creatureId,
+      image: creatureImg,
     };
     putCreature(editedCreature).then(() => {
       navigate("/creatures");
@@ -80,7 +86,7 @@ export const NewCreatureForm = ({ currentUser }) => {
   }, [creatureId]);
   return (
     <div className="new-creature-form">
-      <div>
+      <div className="names">
         <input
           type="text"
           placeholder="Creature Name"
@@ -119,30 +125,39 @@ export const NewCreatureForm = ({ currentUser }) => {
           </option>
           <CategoryList />
         </select>
-
-        <div>
-          <input
-            className="description"
-            placeholder="Creature Description"
-            value={creatureDescription}
-            onChange={(desEvent) => {
-              setCreatureDescription(desEvent.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <input
-            className="diet"
-            placeholder="Creature Diet"
-            value={creatureDiet}
-            onChange={(dietEvent) => {
-              setCreatureDiet(dietEvent.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <button onClick={handleSubmit}>Submit</button>
-        </div>
+      </div>
+      <div>
+        <input
+          className="description"
+          placeholder="Creature Description"
+          value={creatureDescription}
+          onChange={(desEvent) => {
+            setCreatureDescription(desEvent.target.value);
+          }}
+        ></input>
+      </div>
+      <div>
+        <input
+          className="diet"
+          placeholder="Creature Diet"
+          value={creatureDiet}
+          onChange={(dietEvent) => {
+            setCreatureDiet(dietEvent.target.value);
+          }}
+        />
+      </div>
+      <div>
+        <input
+          className="image"
+          placeholder="Image URL"
+          value={creatureImg}
+          onChange={(imgEvt) => {
+            setCreatureImg(imgEvt.target.value);
+          }}
+        />
+      </div>
+      <div>
+        <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );
