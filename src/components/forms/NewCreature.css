@@ -1,0 +1,28 @@
+.new-creature-form {
+    display: flex;    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px black solid;
+    margin-left: 5rem;
+}
+
+input {
+padding: 3px;
+margin: 5px;
+}
+
+select {
+    padding: 3px;
+    margin: 5px;
+}
+
+.description {
+    height: 150px;
+    width: 100%;
+}
+
+.diet {
+    height: 75px;
+    width: 100%;
+}

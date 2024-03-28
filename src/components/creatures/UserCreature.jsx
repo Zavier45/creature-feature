@@ -1,13 +1,26 @@
 import React from "react";
 import { filterUserCreatures } from "../../services/creatureService";
+import { useNavigate } from "react-router";
+import { deleteCreature } from "../../services/creatureService";
 
 export const UserCreature = ({ currentUser }) => {
   const [userCreatures, setUserCreatures] = React.useState([]);
 
-  React.useEffect(() => {
-    filterUserCreatures(currentUser.id).then((creaturesArray) => {
+  const navigate = useNavigate();
+
+  const fetchUserCreatures = () => {
+    filterUserCreatures(currentUser?.id).then((creaturesArray) => {
       setUserCreatures(creaturesArray);
     });
+  };
+
+  const handleDeleteCreatures = (creature) => {
+    deleteCreature(creature).then(() => {
+      fetchUserCreatures();
+    });
+  };
+  React.useEffect(() => {
+    fetchUserCreatures();
   }, [currentUser]);
 
   return (
@@ -28,7 +41,7 @@ export const UserCreature = ({ currentUser }) => {
               <div>
                 <button
                   onClick={() => {
-                    deleteCreature(creature);
+                    handleDeleteCreatures(creature);
                   }}
                 >
                   Terminate
