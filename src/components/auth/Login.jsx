@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { getUserByEmail } from "../../services/userService.js";
+import UserService from "../../services/userService.js";
+
+const userService = new UserService();
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,16 +13,10 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    getUserByEmail(email).then((foundUsers) => {
+    userService.getUserByEmail(email).then((foundUsers) => {
       if (foundUsers.length === 1) {
         const user = foundUsers[0];
-        localStorage.setItem(
-          "creature_user",
-          JSON.stringify({
-            id: user.id,
-            isStaff: user.isStaff,
-          })
-        );
+        localStorage.setItem("creature_user", JSON.stringify(user));
 
         navigate("/");
       } else {
@@ -57,7 +53,7 @@ export const Login = () => {
           </fieldset>
         </form>
       </section>
-      <section>
+      <section className="register">
         <Link to="/register">Don't Have an Account?</Link>
       </section>
     </main>
