@@ -1,4 +1,7 @@
 .container-login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     text-align: center;
   }
   
@@ -78,3 +81,7 @@
     outline-offset: 2px;
   }
   
+  .register {
+    text-shadow:  black 2px;
+    color: black;
+  }

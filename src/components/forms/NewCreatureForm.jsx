@@ -18,6 +18,7 @@ export const NewCreatureForm = ({ currentUser }) => {
   const [creatureDescription, setCreatureDescription] = React.useState("");
   const [creatureDiet, setCreatureDiet] = React.useState("");
   const [creatureImg, setCreatureImg] = React.useState("");
+  const [creatureTale, setCreatureTale] = React.useState("");
 
   const { creatureId } = useParams();
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export const NewCreatureForm = ({ currentUser }) => {
       setCreatureDescription(editCreature.description);
       setCreatureDiet(editCreature.diet);
       setCreatureImg(editCreature.image);
+      setCreatureTale(editCreature.tales);
     });
   };
 
@@ -42,6 +44,7 @@ export const NewCreatureForm = ({ currentUser }) => {
       countryId: creatureCountry,
       userId: currentUser.id,
       image: creatureImg,
+      tales: creatureTale,
     };
     postCreature(newCreature).then((response) => {
       getAllCreatures().then((creaturesArray) => {
@@ -52,6 +55,7 @@ export const NewCreatureForm = ({ currentUser }) => {
         setCreatureDescription("");
         setCreatureDiet("");
         setCreatureImg("");
+        setCreatureTale("");
       });
     });
   };
@@ -66,6 +70,7 @@ export const NewCreatureForm = ({ currentUser }) => {
       userId: currentUser.id,
       id: creatureId,
       image: creatureImg,
+      tales: creatureTale,
     };
     putCreature(editedCreature).then(() => {
       navigate("/creatures");
@@ -127,22 +132,38 @@ export const NewCreatureForm = ({ currentUser }) => {
         </select>
       </div>
       <div>
-        <input
-          className="description"
-          placeholder="Creature Description"
-          value={creatureDescription}
-          onChange={(desEvent) => {
-            setCreatureDescription(desEvent.target.value);
-          }}
-        ></input>
+        <label>
+          <textarea
+            className="description"
+            placeholder="Creature Description"
+            value={creatureDescription}
+            rows="5"
+            cols="75"
+            onChange={(desEvent) => {
+              setCreatureDescription(desEvent.target.value);
+            }}
+          ></textarea>
+        </label>
       </div>
       <div>
-        <input
+        <textarea
+          rows="5"
+          cols="75"
           className="diet"
           placeholder="Creature Diet"
           value={creatureDiet}
           onChange={(dietEvent) => {
             setCreatureDiet(dietEvent.target.value);
+          }}
+        />
+      </div>
+      <div>
+        <input
+          className="tales"
+          placeholder="Tales"
+          value={creatureTale}
+          onChange={(taleEvt) => {
+            setCreatureTale(taleEvt.target.value);
           }}
         />
       </div>

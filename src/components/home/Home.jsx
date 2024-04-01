@@ -3,9 +3,10 @@ import "./Home.css";
 
 export const Home = () => {
   return (
-    <section>
+    <section className="home-container">
       <div>
-        <h1>Creature Features</h1>
+        <h1>Creature Feature</h1>
+        <h2>Come Explore!</h2>
       </div>
     </section>
   );

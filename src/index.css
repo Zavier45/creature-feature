@@ -24,14 +24,17 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url("https://d3f9k0n15ckvhe.cloudfront.net/wp-content/uploads/2016/10/prima-baciu-Transylvania-Hostel-via-hostelcluj.com_.png");
+  background-size: 100vw 100vh;
+   
 }
 
-h3 {
+h1, h2 {
   text-decoration-line: underline;
+  font-family: "Fascinate Inline", Arial, Helvetica, sans-serif;
+  font-size: x-large;
 }
 
 button {

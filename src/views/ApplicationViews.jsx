@@ -5,6 +5,7 @@ import { NewCreatureForm } from "../components/forms/NewCreatureForm.jsx";
 import { Home } from "../components/home/Home.jsx";
 import { Creature } from "../components/creatures/Creature.jsx";
 import { UserCreature } from "../components/creatures/UserCreature.jsx";
+import { UserProfile } from "../components/users/UserProfile.jsx";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = React.useState();
@@ -44,6 +45,10 @@ export const ApplicationViews = () => {
             element={<NewCreatureForm currentUser={currentUser} />}
           />
         </Route>
+        <Route
+          path="user-profile"
+          element={<UserProfile user={currentUser} />}
+        />
       </Route>
     </Routes>
   );

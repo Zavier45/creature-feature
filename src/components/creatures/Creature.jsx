@@ -9,12 +9,20 @@ import { useNavigate } from "react-router";
 export const Creature = ({ currentUser }) => {
   const [allCreatures, setAllCreatures] = React.useState([]);
   const [searchObj, setSearchObj] = React.useState("");
+  const [filteredCreature, setFilteredCreature] = React.useState([]);
 
   React.useEffect(() => {
     getAllCreatures().then((creaturesArray) => {
       setAllCreatures(creaturesArray);
     }, []);
   });
+
+  React.useEffect(() => {
+    const foundCreature = allCreatures.filter((creature) =>
+      creature.name.toLowerCase().includes(searchObj.toLowerCase())
+    );
+    setFilteredCreature(foundCreature);
+  }, [searchObj, allCreatures]);
 
   const navigate = useNavigate();
 
@@ -32,7 +40,7 @@ export const Creature = ({ currentUser }) => {
         />
       </div>
       <article className="creatures">
-        {allCreatures.map((creature) => {
+        {filteredCreature.map((creature) => {
           return (
             <section className="creature" key={creature.id}>
               <header className="creature-info">{creature?.name}</header>
@@ -44,8 +52,14 @@ export const Creature = ({ currentUser }) => {
               <div>{creature?.country.name}</div>
               <h3>Category</h3>
               <div>{creature?.category.category}</div>
+              <h3>Tales</h3>
+              <div>{creature?.tales}</div>
               <div>
-                <image></image>
+                <img
+                  src={creature.image}
+                  alt="creature-image"
+                  className="creature-image"
+                />
               </div>
               {creature.userId === currentUser.id ? (
                 <div>
@@ -54,7 +68,7 @@ export const Creature = ({ currentUser }) => {
                       deleteCreature(creature);
                     }}
                   >
-                    Terminate
+                    Slay
                   </button>
                   <button
                     onClick={() => {

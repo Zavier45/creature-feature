@@ -19,6 +19,13 @@
     font-size: larger;
 }
 
+.creature-image {
+height: 200px;
+width: 200px;
+}
+
+
+
 .creature > footer {
     display: flex;
     border-top: 1px sold var(--outline);
