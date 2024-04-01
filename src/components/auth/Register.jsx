@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { createUser, getUserByEmail } from "../../services/userService";
+import UserService from "../../services/userService";
+
+const userService = new UserService();
 
 export const Register = (props) => {
   const [user, setUser] = useState({
     email: "",
-    fullName: "",
-    userName: "",
+    name: "",
+    username: "",
+    bio: "",
+    image: "",
+    favCreature: "",
     isStaff: false,
   });
   let navigate = useNavigate();
 
   const registerNewUser = () => {
-    createUser(user).then((createdUser) => {
+    userService.createUser(user).then((createdUser) => {
       if (createdUser.hasOwnProperty("id")) {
         localStorage.setItem(
           "creature_user",
@@ -30,7 +35,7 @@ export const Register = (props) => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    getUserByEmail(user.email).then((response) => {
+    userService.getUserByEmail(user.email).then((response) => {
       if (response.length > 0) {
         // Duplicate email. No good.
         window.alert("Account with that email address already exists");
@@ -57,7 +62,7 @@ export const Register = (props) => {
             <input
               onChange={updateUser}
               type="text"
-              id="fullName"
+              id="name"
               className="form-control"
               placeholder="Enter your name"
               required
@@ -70,7 +75,7 @@ export const Register = (props) => {
             <input
               onChange={updateUser}
               type="text"
-              id="userName"
+              id="username"
               className="form-control"
               placeholder="Enter a username"
               required
@@ -92,7 +97,7 @@ export const Register = (props) => {
         </fieldset>
         <fieldset>
           <div className="form-group">
-            <label>
+            {/* <label>
               <input
                 onChange={(evt) => {
                   const copy = { ...user };
@@ -103,7 +108,7 @@ export const Register = (props) => {
                 id="isStaff"
               />
               I am an employee{" "}
-            </label>
+            </label> */}
           </div>
         </fieldset>
         <fieldset>
