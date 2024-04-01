@@ -37,6 +37,13 @@ export const UserCreature = ({ currentUser }) => {
             <div>{creature?.country.name}</div>
             <h3>Category</h3>
             <div>{creature?.category.category}</div>
+            <div>
+              <img
+                src={creature.image}
+                alt="creature-image"
+                className="creature-image"
+              />
+            </div>
             {creature.userId === currentUser.id ? (
               <div>
                 <button
