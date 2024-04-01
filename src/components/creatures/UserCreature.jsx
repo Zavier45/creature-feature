@@ -37,6 +37,8 @@ export const UserCreature = ({ currentUser }) => {
             <div>{creature?.country.name}</div>
             <h3>Category</h3>
             <div>{creature?.category.category}</div>
+            <h3>Tales</h3>
+            <div>{creature?.tales}</div>
             <div>
               <img
                 src={creature.image}
